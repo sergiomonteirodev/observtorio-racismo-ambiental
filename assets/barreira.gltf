@@ -11,8 +11,7 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -27,14 +26,15 @@
 				0.70710688829422
 			],
 			"scale":[
-				0.007000000216066837,
-				0.006999999284744263,
-				0.006999999284744263
+				0.009999999776482582,
+				0.009999998845160007,
+				0.009999998845160007
+			],
+			"translation":[
+				0,
+				-0.47999998927116394,
+				0
 			]
-		},
-		{
-			"mesh":1,
-			"name":"Cube"
 		}
 	],
 	"materials":[
@@ -635,20 +635,6 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.9
 			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Material",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.800000011920929,
-					0.800000011920929,
-					0.800000011920929,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
 		}
 	],
 	"meshes":[
@@ -1068,20 +1054,6 @@
 					},
 					"indices":183,
 					"material":45
-				}
-			]
-		},
-		{
-			"name":"Cube",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":184,
-						"NORMAL":185,
-						"TEXCOORD_0":186
-					},
-					"indices":187,
-					"material":46
 				}
 			]
 		}
@@ -3068,40 +3040,6 @@
 			"componentType":5123,
 			"count":171,
 			"type":"SCALAR"
-		},
-		{
-			"bufferView":184,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				1,
-				1,
-				1
-			],
-			"min":[
-				-1,
-				-1,
-				-1
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":185,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":186,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":187,
-			"componentType":5123,
-			"count":36,
-			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -4208,30 +4146,6 @@
 			"byteLength":342,
 			"byteOffset":8768772,
 			"target":34963
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":8769116,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":8769404,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":8769692,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":72,
-			"byteOffset":8769884,
-			"target":34963
 		}
 	],
 	"samplers":[
@@ -4242,7 +4156,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":8769956,
+			"byteLength":8769116,
 			"uri":"barreira.bin"
 		}
 	]
