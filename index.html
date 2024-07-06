@@ -16,13 +16,14 @@
     <a-scene
         vr-mode-ui="enabled: false"
 		embedded
-        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'
+        device-orientation-permission-ui="enabled: true">
         
-        <a-camera gps-camera rotation-reader></a-camera>
+        <a-camera gps-camera look-controls="enabled: true"></a-camera>
         <a-entity gltf-model="./marcador/assets/barreira.gltf" 
-        scale="2 2 2"
+        scale="5 5 5"
+        rotation="-90 0 0"
         position="0 0 0"
-        rotation="90 0 0"
-        gps-entity-place="longitude: -34.955120; latitude: -8.048860;" animation-mixer/>
+        gps-entity-place="longitude: -34.955120; latitude: -8.048860;"/>
 	</a-scene>
 </body>
