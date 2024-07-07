@@ -13,9 +13,11 @@
     AFRAME.registerComponent('fix-rotation', {
       tick: function () {
         var rotation = this.el.object3D.rotation;
+        rotation.x = -Math.PI / 2; // Fixar rotação no eixo X para ficar paralelo ao chão
         rotation.z = 0; // Fixar rotação no eixo Z
       }
     });
+    
     document.addEventListener("DOMContentLoaded", function() {
       const sceneEl = document.querySelector('a-scene');
 
