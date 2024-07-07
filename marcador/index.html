@@ -10,11 +10,13 @@
   <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
   <script>
 
-    AFRAME.registerComponent('fix-rotation', {
+    AFRAME.registerComponent('fix-position', {
       tick: function () {
+        var position = this.el.object3D.position;
         var rotation = this.el.object3D.rotation;
-       // rotation.x = -Math.PI / 2; // Fixar rotação no eixo X para ficar paralelo ao chão
-        rotation.z = 0; // Fixar rotação no eixo Z
+        
+        position.set(0, 0, 0); // Define a posição desejada
+        rotation.set(-Math.PI / 2, 0, 0); // Define a rotação desejada para alinhar ao chão
       }
     });
 
