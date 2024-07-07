@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
   <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
   <script>
-
+    /**
     AFRAME.registerComponent('lock-orientation', {
       init: function () {
         this.initialPosition = new THREE.Vector3();
@@ -32,8 +32,8 @@
           this.el.object3D.rotation.set(-Math.PI / 2, 0, 0); // Fix the rotation to be always flat on the ground
         }
       }
-    });
-    /**document.addEventListener("DOMContentLoaded", function() {
+    });**/
+    document.addEventListener("DOMContentLoaded", function() {
       const sceneEl = document.querySelector('a-scene');
 
       sceneEl.addEventListener("targetFound", event => {
@@ -43,7 +43,7 @@
       sceneEl.addEventListener("targetLost", event => {
         console.log("target lost");
       });
-    });**/
+    });
   </script>
   <title>Observatorio Racismo Ambiental</title>
 </head>
