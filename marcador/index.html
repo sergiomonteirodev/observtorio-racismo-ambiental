@@ -10,16 +10,31 @@
   <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
   <script>
 
-    AFRAME.registerComponent('initial-position-rotation', {
+  AFRAME.registerComponent('fix-position-rotation', {
       init: function () {
+        this.fixedPosition = new THREE.Vector3();
+        this.fixedRotation = new THREE.Euler();
+        this.targetFound = false;
+
         this.el.addEventListener('targetFound', () => {
-          this.el.setAttribute('position', { x: 0, y: 0, z: 0 });
-          this.el.setAttribute('rotation', { x: -90, y: 0, z: 0 });
+          this.fixedPosition.copy(this.el.object3D.position);
+          this.fixedRotation.copy(this.el.object3D.rotation);
+          this.targetFound = true;
         });
+
+        this.el.addEventListener('targetLost', () => {
+          this.targetFound = false;
+        });
+      },
+      tick: function () {
+        if (this.targetFound) {
+          this.el.object3D.position.copy(this.fixedPosition);
+          this.el.object3D.rotation.copy(this.fixedRotation);
+        }
       }
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
+    /**document.addEventListener("DOMContentLoaded", function() {
       const sceneEl = document.querySelector('a-scene');
 
       sceneEl.addEventListener("targetFound", event => {
@@ -29,7 +44,7 @@
       sceneEl.addEventListener("targetLost", event => {
         console.log("target lost");
       });
-    });
+    });**/
   </script>
   <title>Observatorio Racismo Ambiental</title>
 </head>
