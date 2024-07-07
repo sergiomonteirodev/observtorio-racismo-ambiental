@@ -9,6 +9,13 @@
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
   <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
   <script>
+
+    AFRAME.registerComponent('fix-rotation', {
+      tick: function () {
+        var rotation = this.el.object3D.rotation;
+        rotation.z = 0; // Fixar rotação no eixo Z
+      }
+    });
     document.addEventListener("DOMContentLoaded", function() {
       const sceneEl = document.querySelector('a-scene');
 
@@ -42,7 +49,8 @@
         src="#avatarModel"
         scale="1 1 1"
         rotation="0 0 0"
-        position="0 0 0">
+        position="0 0 0"
+        fix-rotation>
       </a-gltf-model>
     </a-entity>
   </a-scene>
