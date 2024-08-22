@@ -18,8 +18,8 @@
       // Função para alternar entre o GLTF e o vídeo
       button.addEventListener('click', function() {
         if (gltfModel.getAttribute('visible')) {
-          // Interrompe a leitura do target e oculta o modelo GLTF
-          sceneEl.components['mindar-image'].stop(); // Para a leitura do target
+          // Desabilita o componente mindar-image para parar a leitura do target
+          sceneEl.removeAttribute('mindar-image');
           gltfModel.setAttribute('visible', false);
 
           // Exibe e reproduz o vídeo
@@ -29,8 +29,8 @@
           // Atualiza o texto do botão
           button.textContent = 'Mostrar Modelo 3D';
         } else {
-          // Retoma a leitura do target e exibe o modelo GLTF
-          sceneEl.components['mindar-image'].start(); // Retoma a leitura do target
+          // Reabilita o componente mindar-image para retomar a leitura do target
+          sceneEl.setAttribute('mindar-image', 'imageTargetSrc: assets/targets.mind; filterMinCF: 0.001; filterBeta: 0.01');
           gltfModel.setAttribute('visible', true);
 
           // Oculta o vídeo e pausa a reprodução
