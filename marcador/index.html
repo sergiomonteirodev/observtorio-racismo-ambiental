@@ -13,19 +13,32 @@
       const gltfModel = document.querySelector('#gltfModel');
       const videoEl = document.getElementById('video');
       const button = document.getElementById('toggleBtn');
+      const sceneEl = document.querySelector('a-scene');
 
       // Função para alternar entre o GLTF e o vídeo
       button.addEventListener('click', function() {
         if (gltfModel.getAttribute('visible')) {
+          // Parar a leitura do QR Code e esconder o modelo GLTF
+          sceneEl.setAttribute('mindar-image', 'enabled', false);
           gltfModel.setAttribute('visible', false);
+
+          // Mostrar o vídeo
           videoEl.style.display = 'block';
           videoEl.play();
+
+          // Alterar o rótulo do botão
           button.textContent = 'Mostrar Modelo 3D';
         } else {
+          // Retomar a leitura do QR Code e mostrar o modelo GLTF
+          sceneEl.setAttribute('mindar-image', 'enabled', true);
           gltfModel.setAttribute('visible', true);
+
+          // Esconder o vídeo
           videoEl.style.display = 'none';
           videoEl.pause();
-          button.textContent = 'Mostrar Vídeo';
+
+          // Alterar o rótulo do botão
+          button.textContent = 'Ver Vídeo';
         }
       });
     });
@@ -58,7 +71,7 @@
   <title>Observatorio Racismo Ambiental</title>
 </head>
 <body>
-  <button id="toggleBtn">Mostrar Vídeo</button>
+  <button id="toggleBtn">Ver Vídeo</button>
 
   <video id="video" controls>
     <source src="assets/video.mp4" type="video/mp4">
