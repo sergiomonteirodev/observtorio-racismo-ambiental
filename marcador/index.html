@@ -14,7 +14,22 @@
       const videoEl = document.getElementById('video');
       const button = document.getElementById('toggleBtn');
       const sceneEl = document.querySelector('a-scene');
+      const mindarComponent = sceneEl.components['mindar-image'];
       let isVideoPlaying = false;
+
+      // Função para parar o escaneamento do target
+      function stopTargetTracking() {
+        if (mindarComponent) {
+          mindarComponent.stop();
+        }
+      }
+
+      // Função para iniciar o escaneamento do target
+      function startTargetTracking() {
+        if (mindarComponent) {
+          mindarComponent.start();
+        }
+      }
 
       button.addEventListener('click', function() {
         if (isVideoPlaying) {
@@ -23,8 +38,10 @@
           videoEl.style.display = 'none';
           gltfModel.setAttribute('visible', true);
           button.textContent = 'Ver Vídeo';
+          startTargetTracking(); // Retoma o escaneamento do target
         } else {
-          // Mostra o vídeo e oculta o modelo GLTF
+          // Para o escaneamento do target, oculta o modelo GLTF e mostra o vídeo
+          stopTargetTracking(); // Interrompe o escaneamento do target
           gltfModel.setAttribute('visible', false);
           videoEl.style.display = 'block';
           videoEl.play().catch(error => {
@@ -32,7 +49,7 @@
           });
           button.textContent = 'Mostrar Modelo 3D';
         }
-        isVideoPlaying = !isVideoPlaying;
+        isVideoPlaying = !isVideoPlaying; // Alterna o estado do vídeo
       });
     });
   </script>
