@@ -14,11 +14,10 @@
       const videoEl = document.getElementById('video');
       const button = document.getElementById('toggleBtn');
       const sceneEl = document.querySelector('a-scene');
-      let mindarComponent;
+      const mindarComponent = sceneEl.components['mindar-image'];
 
       // Função para desativar o escaneamento do target
       function stopTargetTracking() {
-        mindarComponent = sceneEl.components['mindar-image'];
         if (mindarComponent) {
           mindarComponent.stop();
         }
@@ -38,13 +37,11 @@
           stopTargetTracking();
           gltfModel.setAttribute('visible', false);
 
-          // Aguarda a ocultação do modelo GLTF antes de exibir o vídeo
-          setTimeout(() => {
-            videoEl.style.display = 'block';
-            videoEl.play().catch(error => {
-              console.error('Erro ao reproduzir o vídeo:', error);
-            });
-          }, 100); // Atraso de 100ms para garantir que o modelo GLTF esteja oculto
+          // Exibe o vídeo
+          videoEl.style.display = 'block';
+          videoEl.play().catch(error => {
+            console.error('Erro ao reproduzir o vídeo:', error);
+          });
 
           // Atualiza o texto do botão
           button.textContent = 'Mostrar Modelo 3D';
@@ -53,15 +50,12 @@
           videoEl.pause();
           videoEl.style.display = 'none';
 
-          // Aguarda a pausa completa do vídeo antes de exibir o modelo GLTF
-          videoEl.onpause = function() {
-            // Retoma a leitura do target e exibe o modelo GLTF
-            startTargetTracking();
-            gltfModel.setAttribute('visible', true);
+          // Retoma a leitura do target e exibe o modelo GLTF
+          startTargetTracking();
+          gltfModel.setAttribute('visible', true);
 
-            // Atualiza o texto do botão
-            button.textContent = 'Ver Vídeo';
-          };
+          // Atualiza o texto do botão
+          button.textContent = 'Ver Vídeo';
         }
       });
     });
@@ -75,6 +69,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      z-index: 10;
     }
 
     #toggleBtn {
