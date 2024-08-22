@@ -9,45 +9,62 @@
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
   <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
   <script>
-    /**
-    AFRAME.registerComponent('lock-orientation', {
-      init: function () {
-        this.initialPosition = new THREE.Vector3();
-        this.initialRotation = new THREE.Euler();
-        this.targetFound = false;
-
-        this.el.addEventListener('targetFound', () => {
-          this.initialPosition.copy(this.el.object3D.position);
-          this.initialRotation.copy(this.el.object3D.rotation);
-          this.targetFound = true;
-        });
-
-        this.el.addEventListener('targetLost', () => {
-          this.targetFound = false;
-        });
-      },
-      tick: function () {
-        if (this.targetFound) {
-          this.el.object3D.position.copy(this.initialPosition);
-          this.el.object3D.rotation.set(-Math.PI / 2, 0, 0); // Fix the rotation to be always flat on the ground
-        }
-      }
-    });**/
     document.addEventListener("DOMContentLoaded", function() {
-      const sceneEl = document.querySelector('a-scene');
+      const gltfModel = document.querySelector('#gltfModel');
+      const videoEl = document.getElementById('video');
+      const button = document.getElementById('toggleBtn');
 
-      sceneEl.addEventListener("targetFound", event => {
-        console.log("target found");
-      });
-
-      sceneEl.addEventListener("targetLost", event => {
-        console.log("target lost");
+      // Função para alternar entre o GLTF e o vídeo
+      button.addEventListener('click', function() {
+        if (gltfModel.getAttribute('visible')) {
+          gltfModel.setAttribute('visible', false);
+          videoEl.style.display = 'block';
+          videoEl.play();
+          button.textContent = 'Mostrar Modelo 3D';
+        } else {
+          gltfModel.setAttribute('visible', true);
+          videoEl.style.display = 'none';
+          videoEl.pause();
+          button.textContent = 'Mostrar Vídeo';
+        }
       });
     });
   </script>
+  <style>
+    #video {
+      display: none; /* Esconde o vídeo até que o botão seja clicado */
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #toggleBtn {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 100;
+    }
+  </style>
   <title>Observatorio Racismo Ambiental</title>
 </head>
 <body>
+  <button id="toggleBtn">Mostrar Vídeo</button>
+
+  <video id="video" controls>
+    <source src="assets/video.mp4" type="video/mp4">
+    Seu navegador não suporta a reprodução de vídeos.
+  </video>
+
   <a-scene
     mindar-image="imageTargetSrc: assets/targets.mind; filterMinCF: 0.001; filterBeta: 0.01"
     color-space="sRGB"
@@ -61,12 +78,13 @@
 
     <a-camera position="0 0 1" look-controls="enabled: false"></a-camera>
 
-    <a-entity mindar-image-target="targetIndex:0">
+    <a-entity id="gltfModel" mindar-image-target="targetIndex:0">
       <a-gltf-model
         src="#avatarModel"
         scale="2 2 2" 
         rotation="90 0 0"
-        position="0 0 0">
+        position="0 0 0"
+        visible="true">
       </a-gltf-model>
     </a-entity>
   </a-scene>
