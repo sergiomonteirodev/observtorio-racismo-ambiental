@@ -17,14 +17,12 @@
       const mindarComponent = sceneEl.components['mindar-image'];
       let isVideoPlaying = false;
 
-      // Função para parar o escaneamento do target
       function stopTargetTracking() {
         if (mindarComponent) {
           mindarComponent.stop();
         }
       }
 
-      // Função para iniciar o escaneamento do target
       function startTargetTracking() {
         if (mindarComponent) {
           mindarComponent.start();
@@ -33,15 +31,13 @@
 
       button.addEventListener('click', function() {
         if (isVideoPlaying) {
-          // Oculta o vídeo e mostra o modelo GLTF
           videoEl.pause();
           videoEl.style.display = 'none';
           gltfModel.setAttribute('visible', true);
           button.textContent = 'Ver Vídeo';
-          startTargetTracking(); // Retoma o escaneamento do target
+          startTargetTracking();
         } else {
-          // Para o escaneamento do target, oculta o modelo GLTF e mostra o vídeo
-          stopTargetTracking(); // Interrompe o escaneamento do target
+          stopTargetTracking();
           gltfModel.setAttribute('visible', false);
           videoEl.style.display = 'block';
           videoEl.play().catch(error => {
@@ -49,20 +45,20 @@
           });
           button.textContent = 'Mostrar Modelo 3D';
         }
-        isVideoPlaying = !isVideoPlaying; // Alterna o estado do vídeo
+        isVideoPlaying = !isVideoPlaying;
       });
     });
   </script>
   <style>
     #video {
-      display: none; /* Esconde o vídeo até que o botão seja clicado */
-      width: 100%;
-      height: auto;
+      display: none;
+      width: 100vw; /* Largura igual a 100% da viewport */
+      height: 100vh; /* Altura igual a 100% da viewport */
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
       z-index: 10;
+      object-fit: cover; /* Garante que o vídeo preencha a tela sem distorção */
     }
 
     #toggleBtn {
