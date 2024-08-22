@@ -14,49 +14,25 @@
       const videoEl = document.getElementById('video');
       const button = document.getElementById('toggleBtn');
       const sceneEl = document.querySelector('a-scene');
-      const mindarComponent = sceneEl.components['mindar-image'];
+      let isVideoPlaying = false;
 
-      // Função para desativar o escaneamento do target
-      function stopTargetTracking() {
-        if (mindarComponent) {
-          mindarComponent.stop();
-        }
-      }
-
-      // Função para reativar o escaneamento do target
-      function startTargetTracking() {
-        if (mindarComponent) {
-          mindarComponent.start();
-        }
-      }
-
-      // Função para alternar entre o GLTF e o vídeo
       button.addEventListener('click', function() {
-        if (gltfModel.getAttribute('visible')) {
-          // Interrompe a leitura do target e oculta o modelo GLTF
-          stopTargetTracking();
+        if (isVideoPlaying) {
+          // Oculta o vídeo e mostra o modelo GLTF
+          videoEl.pause();
+          videoEl.style.display = 'none';
+          gltfModel.setAttribute('visible', true);
+          button.textContent = 'Ver Vídeo';
+        } else {
+          // Mostra o vídeo e oculta o modelo GLTF
           gltfModel.setAttribute('visible', false);
-
-          // Exibe o vídeo
           videoEl.style.display = 'block';
           videoEl.play().catch(error => {
             console.error('Erro ao reproduzir o vídeo:', error);
           });
-
-          // Atualiza o texto do botão
           button.textContent = 'Mostrar Modelo 3D';
-        } else {
-          // Pausa e oculta o vídeo
-          videoEl.pause();
-          videoEl.style.display = 'none';
-
-          // Retoma a leitura do target e exibe o modelo GLTF
-          startTargetTracking();
-          gltfModel.setAttribute('visible', true);
-
-          // Atualiza o texto do botão
-          button.textContent = 'Ver Vídeo';
         }
+        isVideoPlaying = !isVideoPlaying;
       });
     });
   </script>
@@ -109,13 +85,12 @@
 
     <a-camera position="0 0 1" look-controls="enabled: false"></a-camera>
 
-    <a-entity id="gltfModel" mindar-image-target="targetIndex:0">
+    <a-entity id="gltfModel" mindar-image-target="targetIndex:0" visible="true">
       <a-gltf-model
         src="#avatarModel"
         scale="2 2 2" 
         rotation="90 0 0"
-        position="0 0 0"
-        visible="true">
+        position="0 0 0">
       </a-gltf-model>
     </a-entity>
   </a-scene>
