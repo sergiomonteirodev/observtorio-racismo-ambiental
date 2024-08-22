@@ -18,26 +18,26 @@
       // Função para alternar entre o GLTF e o vídeo
       button.addEventListener('click', function() {
         if (gltfModel.getAttribute('visible')) {
-          // Parar a leitura do QR Code e esconder o modelo GLTF
-          sceneEl.setAttribute('mindar-image', 'enabled', false);
+          // Interrompe a leitura do target e oculta o modelo GLTF
+          sceneEl.components['mindar-image'].stop(); // Para a leitura do target
           gltfModel.setAttribute('visible', false);
 
-          // Mostrar o vídeo
+          // Exibe e reproduz o vídeo
           videoEl.style.display = 'block';
           videoEl.play();
 
-          // Alterar o rótulo do botão
+          // Atualiza o texto do botão
           button.textContent = 'Mostrar Modelo 3D';
         } else {
-          // Retomar a leitura do QR Code e mostrar o modelo GLTF
-          sceneEl.setAttribute('mindar-image', 'enabled', true);
+          // Retoma a leitura do target e exibe o modelo GLTF
+          sceneEl.components['mindar-image'].start(); // Retoma a leitura do target
           gltfModel.setAttribute('visible', true);
 
-          // Esconder o vídeo
+          // Oculta o vídeo e pausa a reprodução
           videoEl.style.display = 'none';
           videoEl.pause();
 
-          // Alterar o rótulo do botão
+          // Atualiza o texto do botão
           button.textContent = 'Ver Vídeo';
         }
       });
