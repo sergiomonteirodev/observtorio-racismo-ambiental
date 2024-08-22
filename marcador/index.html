@@ -37,12 +37,15 @@
           videoEl.pause();
           videoEl.style.display = 'none';
 
-          // Retoma a leitura do target e exibe o modelo GLTF
-          sceneEl.setAttribute('mindar-image', 'imageTargetSrc: assets/targets.mind; filterMinCF: 0.001; filterBeta: 0.01');
-          gltfModel.setAttribute('visible', true);
+          // Aguarda a pausa completa do vídeo antes de exibir o modelo GLTF
+          videoEl.onpause = function() {
+            // Retoma a leitura do target e exibe o modelo GLTF
+            sceneEl.setAttribute('mindar-image', 'imageTargetSrc: assets/targets.mind; filterMinCF: 0.001; filterBeta: 0.01');
+            gltfModel.setAttribute('visible', true);
 
-          // Atualiza o texto do botão
-          button.textContent = 'Ver Vídeo';
+            // Atualiza o texto do botão
+            button.textContent = 'Ver Vídeo';
+          };
         }
       });
     });
